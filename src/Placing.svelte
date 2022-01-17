@@ -109,6 +109,14 @@
 		}
 	}
 
+	function reset() {
+		for (let item of shelf) {
+			for (let scholar of item) {
+				putInCart(scholar)
+			}
+		}
+	}
+
 	function sexColor(scholars) {
 		console.log(scholars)
 		const female = [ parseInt("ff", 16), parseInt("69", 16), parseInt("b4", 16) ]
@@ -186,6 +194,12 @@
 			</Col>
 		</Row>
 	</Container>
+</div>
+
+<div class="container">
+	<div class="row" style="padding: 20px; margin: 20px;">
+		<Button color="primary" on:click={reset}>Resetta</Button>
+	</div>
 </div>
 
 <style>
