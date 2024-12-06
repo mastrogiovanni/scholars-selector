@@ -6,8 +6,13 @@
 	import { draggable } from "./dragdrop.js";
     import { Button, Col, Container, Row } from 'sveltestrap';
     import Scholar from './Scholar.svelte';
+	 import { onMount } from 'svelte';
 
     export let numberOfClasses = "5";
+  
+  onMount(() => {
+    console.log("Number of classes:", numberOfClasses);
+  });
 
 	let shelf = Array.from(Array(parseInt(numberOfClasses)).keys()).map(x => []);
 

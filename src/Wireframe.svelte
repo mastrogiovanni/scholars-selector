@@ -6,7 +6,7 @@ import { Col, Container, Row } from "sveltestrap";
 </script>
 
 
-<Container>
+<Container class="flex items-center justify-center min-h-screen bg-gray-100">
     <Row>
         <Col xs={9}>
             <Container>
