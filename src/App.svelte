@@ -107,7 +107,7 @@ import Placing from './Placing.svelte';
 </Form>
 			
     </StepWizard.Step>
-    <StepWizard.Step num={2} let:previousStep let:nextStep>
+<!--    <StepWizard.Step num={2} let:previousStep let:nextStep>
         <p>
             {numberOfClasses}
         </p>
@@ -120,8 +120,8 @@ import Placing from './Placing.svelte';
         <button on:click={nextStep}>
             Next Step	>
         </button>
-    </StepWizard.Step>
-    <StepWizard.Step num={3} let:previousStep>
+    </StepWizard.Step> -->
+    <StepWizard.Step num={2} let:previousStep>
 		<div>
 		<Placing {numberOfClasses} /> 
     	</div>

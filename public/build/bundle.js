@@ -13097,7 +13097,7 @@ var app = (function () {
     const file_1 = "src\\App.svelte";
 
     // (55:3) <FormGroup floating label="Inserire numero delle sezioni">
-    function create_default_slot_18(ctx) {
+    function create_default_slot_17(ctx) {
     	let input;
     	let updating_value;
     	let current;
@@ -13150,7 +13150,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_18.name,
+    		id: create_default_slot_17.name,
     		type: "slot",
     		source: "(55:3) <FormGroup floating label=\\\"Inserire numero delle sezioni\\\">",
     		ctx
@@ -13160,7 +13160,7 @@ var app = (function () {
     }
 
     // (53:2) <Col>
-    function create_default_slot_17(ctx) {
+    function create_default_slot_16(ctx) {
     	let p;
     	let t1;
     	let formgroup;
@@ -13170,7 +13170,7 @@ var app = (function () {
     			props: {
     				floating: true,
     				label: "Inserire numero delle sezioni",
-    				$$slots: { default: [create_default_slot_18] },
+    				$$slots: { default: [create_default_slot_17] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13217,7 +13217,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_17.name,
+    		id: create_default_slot_16.name,
     		type: "slot",
     		source: "(53:2) <Col>",
     		ctx
@@ -13227,7 +13227,7 @@ var app = (function () {
     }
 
     // (63:3) <FormGroup floating label="Inserire numero totale alunni per classe">
-    function create_default_slot_16(ctx) {
+    function create_default_slot_15(ctx) {
     	let input;
     	let updating_value;
     	let current;
@@ -13280,7 +13280,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_16.name,
+    		id: create_default_slot_15.name,
     		type: "slot",
     		source: "(63:3) <FormGroup floating label=\\\"Inserire numero totale alunni per classe\\\">",
     		ctx
@@ -13290,7 +13290,7 @@ var app = (function () {
     }
 
     // (60:2) <Col>
-    function create_default_slot_15(ctx) {
+    function create_default_slot_14(ctx) {
     	let p;
     	let t1;
     	let formgroup;
@@ -13300,7 +13300,7 @@ var app = (function () {
     			props: {
     				floating: true,
     				label: "Inserire numero totale alunni per classe",
-    				$$slots: { default: [create_default_slot_16] },
+    				$$slots: { default: [create_default_slot_15] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13347,7 +13347,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_15.name,
+    		id: create_default_slot_14.name,
     		type: "slot",
     		source: "(60:2) <Col>",
     		ctx
@@ -13357,7 +13357,7 @@ var app = (function () {
     }
 
     // (52:2) <Row>
-    function create_default_slot_14(ctx) {
+    function create_default_slot_13(ctx) {
     	let col0;
     	let t;
     	let col1;
@@ -13365,7 +13365,7 @@ var app = (function () {
 
     	col0 = new Col({
     			props: {
-    				$$slots: { default: [create_default_slot_17] },
+    				$$slots: { default: [create_default_slot_16] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13373,7 +13373,7 @@ var app = (function () {
 
     	col1 = new Col({
     			props: {
-    				$$slots: { default: [create_default_slot_15] },
+    				$$slots: { default: [create_default_slot_14] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13427,7 +13427,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_14.name,
+    		id: create_default_slot_13.name,
     		type: "slot",
     		source: "(52:2) <Row>",
     		ctx
@@ -13437,13 +13437,13 @@ var app = (function () {
     }
 
     // (51:2) <Container>
-    function create_default_slot_13(ctx) {
+    function create_default_slot_12(ctx) {
     	let row;
     	let current;
 
     	row = new Row({
     			props: {
-    				$$slots: { default: [create_default_slot_14] },
+    				$$slots: { default: [create_default_slot_13] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13482,7 +13482,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_13.name,
+    		id: create_default_slot_12.name,
     		type: "slot",
     		source: "(51:2) <Container>",
     		ctx
@@ -13526,7 +13526,7 @@ var app = (function () {
     }
 
     // (76:2) <FormGroup >
-    function create_default_slot_12(ctx) {
+    function create_default_slot_11(ctx) {
     	let input;
     	let t;
     	let if_block_anchor;
@@ -13591,7 +13591,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_12.name,
+    		id: create_default_slot_11.name,
     		type: "slot",
     		source: "(76:2) <FormGroup >",
     		ctx
@@ -13601,7 +13601,7 @@ var app = (function () {
     }
 
     // (74:1) <Col>
-    function create_default_slot_11(ctx) {
+    function create_default_slot_10(ctx) {
     	let p;
     	let t1;
     	let formgroup;
@@ -13609,7 +13609,7 @@ var app = (function () {
 
     	formgroup = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_12] },
+    				$$slots: { default: [create_default_slot_11] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13656,7 +13656,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_11.name,
+    		id: create_default_slot_10.name,
     		type: "slot",
     		source: "(74:1) <Col>",
     		ctx
@@ -13666,13 +13666,13 @@ var app = (function () {
     }
 
     // (73:1) <Row>
-    function create_default_slot_10(ctx) {
+    function create_default_slot_9(ctx) {
     	let col;
     	let current;
 
     	col = new Col({
     			props: {
-    				$$slots: { default: [create_default_slot_11] },
+    				$$slots: { default: [create_default_slot_10] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13711,7 +13711,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_10.name,
+    		id: create_default_slot_9.name,
     		type: "slot",
     		source: "(73:1) <Row>",
     		ctx
@@ -13721,13 +13721,13 @@ var app = (function () {
     }
 
     // (71:1) <Container>
-    function create_default_slot_9(ctx) {
+    function create_default_slot_8(ctx) {
     	let row;
     	let current;
 
     	row = new Row({
     			props: {
-    				$$slots: { default: [create_default_slot_10] },
+    				$$slots: { default: [create_default_slot_9] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13766,7 +13766,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_9.name,
+    		id: create_default_slot_8.name,
     		type: "slot",
     		source: "(71:1) <Container>",
     		ctx
@@ -13776,7 +13776,7 @@ var app = (function () {
     }
 
     // (92:10) <Col class="d-flex justify-content-center">
-    function create_default_slot_8(ctx) {
+    function create_default_slot_7(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -13806,7 +13806,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8.name,
+    		id: create_default_slot_7.name,
     		type: "slot",
     		source: "(92:10) <Col class=\\\"d-flex justify-content-center\\\">",
     		ctx
@@ -13816,7 +13816,7 @@ var app = (function () {
     }
 
     // (95:10) <Col class="d-flex justify-content-center">
-    function create_default_slot_7(ctx) {
+    function create_default_slot_6(ctx) {
     	let button;
     	let mounted;
     	let dispose;
@@ -13859,7 +13859,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7.name,
+    		id: create_default_slot_6.name,
     		type: "slot",
     		source: "(95:10) <Col class=\\\"d-flex justify-content-center\\\">",
     		ctx
@@ -13869,7 +13869,7 @@ var app = (function () {
     }
 
     // (89:8) <Row>
-    function create_default_slot_6(ctx) {
+    function create_default_slot_5(ctx) {
     	let col0;
     	let t;
     	let col1;
@@ -13878,7 +13878,7 @@ var app = (function () {
     	col0 = new Col({
     			props: {
     				class: "d-flex justify-content-center",
-    				$$slots: { default: [create_default_slot_8] },
+    				$$slots: { default: [create_default_slot_7] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13887,7 +13887,7 @@ var app = (function () {
     	col1 = new Col({
     			props: {
     				class: "d-flex justify-content-center",
-    				$$slots: { default: [create_default_slot_7] },
+    				$$slots: { default: [create_default_slot_6] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13941,7 +13941,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6.name,
+    		id: create_default_slot_5.name,
     		type: "slot",
     		source: "(89:8) <Row>",
     		ctx
@@ -13951,13 +13951,13 @@ var app = (function () {
     }
 
     // (88:2) <Container>
-    function create_default_slot_5(ctx) {
+    function create_default_slot_4(ctx) {
     	let row;
     	let current;
 
     	row = new Row({
     			props: {
-    				$$slots: { default: [create_default_slot_6] },
+    				$$slots: { default: [create_default_slot_5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -13996,7 +13996,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5.name,
+    		id: create_default_slot_4.name,
     		type: "slot",
     		source: "(88:2) <Container>",
     		ctx
@@ -14006,7 +14006,7 @@ var app = (function () {
     }
 
     // (49:2) <Form>
-    function create_default_slot_4(ctx) {
+    function create_default_slot_3(ctx) {
     	let container0;
     	let t0;
     	let container1;
@@ -14016,7 +14016,7 @@ var app = (function () {
 
     	container0 = new Container({
     			props: {
-    				$$slots: { default: [create_default_slot_13] },
+    				$$slots: { default: [create_default_slot_12] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -14024,7 +14024,7 @@ var app = (function () {
 
     	container1 = new Container({
     			props: {
-    				$$slots: { default: [create_default_slot_9] },
+    				$$slots: { default: [create_default_slot_8] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -14032,7 +14032,7 @@ var app = (function () {
 
     	container2 = new Container({
     			props: {
-    				$$slots: { default: [create_default_slot_5] },
+    				$$slots: { default: [create_default_slot_4] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -14101,7 +14101,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4.name,
+    		id: create_default_slot_3.name,
     		type: "slot",
     		source: "(49:2) <Form>",
     		ctx
@@ -14111,7 +14111,7 @@ var app = (function () {
     }
 
     // (46:4) <StepWizard.Step num={1} let:nextStep >
-    function create_default_slot_3(ctx) {
+    function create_default_slot_2(ctx) {
     	let header;
     	let t;
     	let form;
@@ -14120,7 +14120,7 @@ var app = (function () {
 
     	form = new Form({
     			props: {
-    				$$slots: { default: [create_default_slot_4] },
+    				$$slots: { default: [create_default_slot_3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -14167,7 +14167,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3.name,
+    		id: create_default_slot_2.name,
     		type: "slot",
     		source: "(46:4) <StepWizard.Step num={1} let:nextStep >",
     		ctx
@@ -14176,105 +14176,7 @@ var app = (function () {
     	return block;
     }
 
-    // (110:4) <StepWizard.Step num={2} let:previousStep let:nextStep>
-    function create_default_slot_2(ctx) {
-    	let p0;
-    	let t0;
-    	let t1;
-    	let p1;
-    	let t3;
-    	let button0;
-    	let t5;
-    	let button1;
-    	let mounted;
-    	let dispose;
-
-    	const block = {
-    		c: function create() {
-    			p0 = element("p");
-    			t0 = text(/*numberOfClasses*/ ctx[0]);
-    			t1 = space();
-    			p1 = element("p");
-    			p1.textContent = "Insert here the file";
-    			t3 = space();
-    			button0 = element("button");
-    			button0.textContent = "Go Back";
-    			t5 = space();
-    			button1 = element("button");
-    			button1.textContent = "Next Step\t>";
-    			add_location(p0, file_1, 110, 8, 2755);
-    			add_location(p1, file_1, 113, 2, 2807);
-    			add_location(button0, file_1, 116, 8, 2853);
-    			add_location(button1, file_1, 119, 8, 2935);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, p0, anchor);
-    			append_dev(p0, t0);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, p1, anchor);
-    			insert_dev(target, t3, anchor);
-    			insert_dev(target, button0, anchor);
-    			insert_dev(target, t5, anchor);
-    			insert_dev(target, button1, anchor);
-
-    			if (!mounted) {
-    				dispose = [
-    					listen_dev(
-    						button0,
-    						"click",
-    						function () {
-    							if (is_function(/*previousStep*/ ctx[9])) /*previousStep*/ ctx[9].apply(this, arguments);
-    						},
-    						false,
-    						false,
-    						false,
-    						false
-    					),
-    					listen_dev(
-    						button1,
-    						"click",
-    						function () {
-    							if (is_function(/*nextStep*/ ctx[10])) /*nextStep*/ ctx[10].apply(this, arguments);
-    						},
-    						false,
-    						false,
-    						false,
-    						false
-    					)
-    				];
-
-    				mounted = true;
-    			}
-    		},
-    		p: function update(new_ctx, dirty) {
-    			ctx = new_ctx;
-    			if (dirty & /*numberOfClasses*/ 1) set_data_dev(t0, /*numberOfClasses*/ ctx[0]);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p0);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(p1);
-    			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(button0);
-    			if (detaching) detach_dev(t5);
-    			if (detaching) detach_dev(button1);
-    			mounted = false;
-    			run_all(dispose);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_2.name,
-    		type: "slot",
-    		source: "(110:4) <StepWizard.Step num={2} let:previousStep let:nextStep>",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (124:4) <StepWizard.Step num={3} let:previousStep>
+    // (124:4) <StepWizard.Step num={2} let:previousStep>
     function create_default_slot_1(ctx) {
     	let div;
     	let placing;
@@ -14298,8 +14200,8 @@ var app = (function () {
     			t0 = space();
     			button = element("button");
     			button.textContent = "Go Back";
-    			add_location(div, file_1, 124, 2, 3083);
-    			add_location(button, file_1, 127, 5, 3142);
+    			add_location(div, file_1, 124, 2, 3091);
+    			add_location(button, file_1, 127, 5, 3150);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14353,7 +14255,7 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(124:4) <StepWizard.Step num={3} let:previousStep>",
+    		source: "(124:4) <StepWizard.Step num={2} let:previousStep>",
     		ctx
     	});
 
@@ -14363,10 +14265,8 @@ var app = (function () {
     // (45:0) <StepWizard initialStep={1} >
     function create_default_slot(ctx) {
     	let stepwizard_step0;
-    	let t0;
+    	let t;
     	let stepwizard_step1;
-    	let t1;
-    	let stepwizard_step2;
     	let current;
 
     	stepwizard_step0 = new Wizard.Step({
@@ -14374,7 +14274,7 @@ var app = (function () {
     				num: 1,
     				$$slots: {
     					default: [
-    						create_default_slot_3,
+    						create_default_slot_2,
     						({ nextStep }) => ({ 10: nextStep }),
     						({ nextStep }) => nextStep ? 1024 : 0
     					]
@@ -14387,21 +14287,6 @@ var app = (function () {
     	stepwizard_step1 = new Wizard.Step({
     			props: {
     				num: 2,
-    				$$slots: {
-    					default: [
-    						create_default_slot_2,
-    						({ previousStep, nextStep }) => ({ 9: previousStep, 10: nextStep }),
-    						({ previousStep, nextStep }) => (previousStep ? 512 : 0) | (nextStep ? 1024 : 0)
-    					]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	stepwizard_step2 = new Wizard.Step({
-    			props: {
-    				num: 3,
     				$$slots: {
     					default: [
     						create_default_slot_1,
@@ -14417,17 +14302,13 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			create_component(stepwizard_step0.$$.fragment);
-    			t0 = space();
+    			t = space();
     			create_component(stepwizard_step1.$$.fragment);
-    			t1 = space();
-    			create_component(stepwizard_step2.$$.fragment);
     		},
     		m: function mount(target, anchor) {
     			mount_component(stepwizard_step0, target, anchor);
-    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t, anchor);
     			mount_component(stepwizard_step1, target, anchor);
-    			insert_dev(target, t1, anchor);
-    			mount_component(stepwizard_step2, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -14440,38 +14321,27 @@ var app = (function () {
     			stepwizard_step0.$set(stepwizard_step0_changes);
     			const stepwizard_step1_changes = {};
 
-    			if (dirty & /*$$scope, nextStep, previousStep, numberOfClasses*/ 3585) {
+    			if (dirty & /*$$scope, previousStep, numberOfClasses*/ 2561) {
     				stepwizard_step1_changes.$$scope = { dirty, ctx };
     			}
 
     			stepwizard_step1.$set(stepwizard_step1_changes);
-    			const stepwizard_step2_changes = {};
-
-    			if (dirty & /*$$scope, previousStep, numberOfClasses*/ 2561) {
-    				stepwizard_step2_changes.$$scope = { dirty, ctx };
-    			}
-
-    			stepwizard_step2.$set(stepwizard_step2_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(stepwizard_step0.$$.fragment, local);
     			transition_in(stepwizard_step1.$$.fragment, local);
-    			transition_in(stepwizard_step2.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(stepwizard_step0.$$.fragment, local);
     			transition_out(stepwizard_step1.$$.fragment, local);
-    			transition_out(stepwizard_step2.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			destroy_component(stepwizard_step0, detaching);
-    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t);
     			destroy_component(stepwizard_step1, detaching);
-    			if (detaching) detach_dev(t1);
-    			destroy_component(stepwizard_step2, detaching);
     		}
     	};
 
