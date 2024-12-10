@@ -140,23 +140,21 @@
 
 </script>
 
-<div class="container">
-	<div class="row" style="padding: 20px; margin: 20px;">
-		<Button color="primary" on:click={arrange}>Sistema in automatico</Button>
-	</div>
+<div class="text-center py-3" >
+  <h1 class="fw-semibold  ">Gestione delle classi</h1>
+<p >Clicca il bottone del sistema automatico o trascina gli alunni nelle sezioni</p>
 </div>
+
 
 <div class="shelf">
 	<Container>
 		<Row>
-			<Col xs={9}>
-				<Container>
 					{#each shelf as items, index}
-					<Row>
-						<Col xs={3}>
-							<Legenda scholars={shelf[index]}></Legenda>
-						</Col>
-						<Col xs={9}>
+		<Col>
+		
+		
+					
+						
 							<div class="slot" on:dropped={(e) => putInShelf(e.detail, index)}>
 								{#each items as item (item.id)}
 									<div
@@ -174,13 +172,19 @@
 									</div>
 								{/each}
 							</div>
-						</Col>
-					</Row>
+							<Legenda scholars={shelf[index]}></Legenda>
+						
+					
+				
+		</Col>
 					{/each}
-				</Container>
+				
 			
-			</Col>
-			<Col xs={3}>
+			
+		</Row>
+	</Container>
+</div>
+			<div xs={3} class="my-2">
 				<div class="cart" on:dropped={(e) => putInCart(e.detail)}>
 					{#each cart as item, index (item.id)}
 						<div
@@ -196,16 +200,17 @@
 					{/each}
 				</div>
 				<Legenda scholars={cart}></Legenda>
-			</Col>
-		</Row>
-	</Container>
-</div>
+			</div>
 
-<div class="container">
-	<div class="row" style="padding: 20px; margin: 20px;">
-		<Button color="primary" on:click={reset}>Resetta</Button>
-	</div>
-</div>
+<Container>
+	<Row style="padding: 20px; margin: 20px;">
+	<Col>	<button on:click={reset}>Resetta</button></Col>
+	<Col>	 <button  on:click={arrange}>Sistema in automatico</button></Col>
+	<Col>	 <button  >Scarica file</button></Col>
+
+	</Row>
+</Container>
+
 
 <style>
 	.slot {

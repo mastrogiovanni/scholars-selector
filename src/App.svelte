@@ -43,7 +43,7 @@ import Placing from './Placing.svelte';
 </script>
 
 <StepWizard initialStep={1} >
-    <StepWizard.Step num={1} let:nextStep >
+    <StepWizard.Step num={2} let:nextStep >
     <Header/>
 
   <Form>
@@ -107,21 +107,8 @@ import Placing from './Placing.svelte';
 </Form>
 			
     </StepWizard.Step>
-    <StepWizard.Step num={2} let:previousStep let:nextStep>
-        <p>
-            {numberOfClasses}
-        </p>
-		<p>
-			Insert here the file
-		</p>
-        <button on:click={previousStep}>
-            Go Back
-        </button>
-        <button on:click={nextStep}>
-            Next Step	>
-        </button>
-    </StepWizard.Step>
-    <StepWizard.Step num={3} let:previousStep>
+
+    <StepWizard.Step num={1} let:previousStep>
 		<div>
 		<Placing {numberOfClasses} /> 
     	</div>
