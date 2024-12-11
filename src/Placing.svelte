@@ -149,6 +149,83 @@ function calculateBorder(scholar) {
    
 	
   });
+  function putInShelf(item, index) {
+		shelf.forEach((itemList, i) => {
+			if (i == index) {
+				if (itemList.indexOf(item) < 0) {
+					itemList.push(item)
+				}
+			}
+			else {
+				let found = itemList.indexOf(item)
+				if (found >= 0) {
+					itemList.splice(found, 1);
+				}
+			}
+		})
+		shelf = shelf
+		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
+		cart = cart
+
+		/*
+		const oldItem = shelf[index];
+		const oldShelfIndex = shelf.indexOf(item);
+		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
+		if (oldShelfIndex !== -1) shelf[oldShelfIndex] = oldItem;
+		else if (oldItem) cart.push(oldItem);
+		shelf[index] = item;
+		cart = cart;
+		*/
+	}
+
+	function putInCart(item) {
+		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
+		cart.push(item);
+		cart = cart;
+		for (let index = 0; index < shelf.length; index ++) {
+			let container = shelf[index]
+			shelf[index] = container.filter(e => {
+				return e.id !== item.id
+			})
+		}
+		shelf = shelf
+	}
+
+	const [send, receive] = crossfade({
+		duration: (d) => 600,
+		easing: elasticOut,
+		fallback(node, params) {
+			const style = getComputedStyle(node);
+			const transform = style.transform === "none" ? "" : style.transform;
+
+			return {
+				duration: 600,
+				easing: quintOut,
+				css: (t) => `
+			transform: ${transform} scale(${t});
+			opacity: ${t}
+		  `,
+			};
+		},
+	});
+
+
+	function arrange() {
+		let index = 0;
+		while (cart.length > 0) {
+			let element = cart.pop();
+			putInShelf(element, index)
+			index = (index + 1) % shelf.length;
+		}
+	}
+
+	function reset() {
+		for (let item of shelf) {
+			for (let scholar of item) {
+				putInCart(scholar)
+			}
+		}
+	}
 
 const sectionLetters = generateSections(numberOfClasses);
 </script>
@@ -207,7 +284,8 @@ const sectionLetters = generateSections(numberOfClasses);
 	<Row style="padding: 20px; margin: 20px;">
 	
 	<Col>	 <button  >Scarica file</button></Col>
-
+            <Col>	<button on:click={reset}>Resetta</button></Col>
+	<Col>	 <button  on:click={arrange}>Sistema in automatico</button></Col>
 	</Row>
 </Container>
 
@@ -221,9 +299,6 @@ const sectionLetters = generateSections(numberOfClasses);
 		min-height: 300px;
 	}
 	
-	.slot .item {
-		/* position: absolute; */
-	}
 	:global(.dragged) {
 		pointer-events: none;
 		z-index: 100;
