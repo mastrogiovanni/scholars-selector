@@ -10,6 +10,7 @@ import Placing from './Placing.svelte';
   let selectedFile; 
  let file;
   let fileContent = null;
+
  
   function handleFileUpload(event) {
      const uploadedFile = event.target.files[0];
@@ -22,12 +23,13 @@ import Placing from './Placing.svelte';
     }
     
   }
+  
 
   function saveData() {
     const formData = {
       numberOfClasses,
       numberTotForClasses,
-      selectedFile: fileContent ? fileContent : null, // Salva solo il nome del file
+      selectedFile: fileContent ? fileContent : null, 
     };
     localStorage.setItem('formData', JSON.stringify(formData));
   }
@@ -37,13 +39,13 @@ import Placing from './Placing.svelte';
     const savedData = JSON.parse(localStorage.getItem("formData"));
     numberOfClasses = savedData.numberOfClasses || '';
     numberTotForClasses = savedData.numberTotForClasses || '';
-    selectedFile = savedData.fileContent || null;
+    selectedFile = savedData.selectedFile || null;
   }
 
 </script>
 
-<StepWizard initialStep={1} >
-    <StepWizard.Step num={2} let:nextStep >
+<StepWizard initialStep={2} >
+    <StepWizard.Step num={1} let:nextStep >
     <Header/>
 
   <Form>
@@ -108,9 +110,9 @@ import Placing from './Placing.svelte';
 			
     </StepWizard.Step>
 
-    <StepWizard.Step num={1} let:previousStep>
+    <StepWizard.Step num={2} let:previousStep>
 		<div>
-		<Placing {numberOfClasses} /> 
+		<Placing /> 
     	</div>
 	    <button on:click={previousStep}>
             Go Back

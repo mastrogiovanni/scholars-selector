@@ -51,4 +51,29 @@ label {
 form {
   margin-block: 10em;
 }
-.slot.svelte-13pcb67.svelte-13pcb67{position:relative;display:inline-block;background:#eee;box-shadow:5px 5px 10px -10px black inset;width:300px;height:300px;margin:3px;vertical-align:top}.cart.svelte-13pcb67.svelte-13pcb67{position:relative;background:#eee;box-shadow:5px 5px 10px -10px black inset;min-height:300px}.item.svelte-13pcb67.svelte-13pcb67{width:16px;height:16px;border-radius:50%;position:relative;display:inline-block;margin:5px}.slot.svelte-13pcb67 .item.svelte-13pcb67{}.dragged{pointer-events:none;z-index:100}.slot.droptarget, .cart.droptarget{background:#ddd}.modal-open{overflow:hidden;padding-right:0}.overflow-noscroll{overflow:hidden;padding-right:0px}.item.svelte-udes0p{width:16px;height:16px;border:50%;background:red;position:relative;display:inline-block;margin:4px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2)}
+.slot {
+  position: relative;
+  display: inline-block;
+  box-shadow: 5px 5px 10px -10px black inset;
+  width: 200px;
+  height: 200px;
+  margin: 3px;
+  vertical-align: top;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 15%;
+  position: relative;
+
+  margin: 5px;
+}
+{}.dragged{pointer-events:none;z-index:100}.slot.droptarget, .cart.droptarget{background:#ddd}.modal-open{overflow:hidden;padding-right:0}.overflow-noscroll{overflow:hidden;padding-right:0px}.item.svelte-udes0p{width:16px;height:16px;border:50%;background:red;position:relative;display:inline-block;margin:4px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2)}

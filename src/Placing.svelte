@@ -7,137 +7,137 @@
     import { Button, Col, Container, Row } from 'sveltestrap';
     import Scholar from './Scholar.svelte';
 	 import { onMount } from 'svelte';
+ 
+ const savedData = JSON.parse(localStorage.getItem("formData"));
+    let numberOfClasses= savedData.numberOfClasses ;
+	let numberTotForClasses=savedData.numberTotForClasses || '';;
+	let  fileContent = savedData.selectedFile || null;
+	// array di studenti dal file
+	let students =[];
+	// dichiarazione funzione di conversione di studenti dal file in array
+  function parseFileContent() {
+    if (fileContent !== null) {
+        console.log("File content:", fileContent); 
 
-    export let numberOfClasses = "5";
-  
+        const lines = fileContent.split('\n'); 
+        console.log("Lines:", lines); // Verifica le righe
+
+       
+        students = lines.slice(1)
+            .map(line => line.trim()) 
+            .filter(Boolean); 
+
+        console.log("Students:", students); 
+    } else {
+        console.error("fileContent is empty or undefined.");
+    }
+}
+
+
+parseFileContent();
+// conversione di numero di sezioni in lettere dell'alfabeto
+function convertNumberToExcelStyleLetter(number) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+
+    while (number > 0) {
+        const index = (number - 1) % 26;
+        result = alphabet[index] + result;
+        number = Math.floor((number - 1) / 26);
+    }
+
+    return result;
+}
+// generazione delle sezioni in base alla lettera dell'alfabeto
+function generateSections(numberOfSections) {
+    const sections = [];
+    for (let i = 1; i <= numberOfSections; i++) {
+        sections.push(convertNumberToExcelStyleLetter(i));
+    }
+    return sections;
+}
+// creazione di uno scaffale vuoto
+  let shelf = Array.from(Array(parseInt(numberOfClasses)).keys()).map(x => []);
+
+  // conversione dell'array di stringhe in un array di oggetti per lavorare meglio con gli elementi
+  const scholars = students.map(row => {
+	const [nome, cognome, sesso, dataNascita, sostegno, tipoSostegno, religione, votoUscita, stessaScuola] = row.split(",");
+	return {
+	 nome,
+    cognome,
+    sesso,
+    dataNascita,
+    sostegno: sostegno === "Sì",
+    tipoSostegno: tipoSostegno || null,
+    religione: religione === "Sì",
+    votoUscita: parseInt(votoUscita, 10),
+    stessaScuola: stessaScuola === "Sì"
+	};
+  });
+// funzioni per la creazione del contenitore degli studenti
+function createCartFromStudents(students) {
+  let result = [];
+  for (let i = 0; i < students.length; i += students.length) {
+    const cluster = students.slice(i, i + students.length);
+    result.push({
+      id: students.length,
+      scholars: cluster
+    });
+  }
+  return result;
+}
+
+
+let cart = createCartFromStudents(scholars);
+
+// funzione per dividere gli studenti in base al colore
+function sexColor(scholars) {
+    console.log(scholars);
+
+    // Colori HEX per maschi e femmine
+    const femaleHex = "#E91E63"; // Rosa
+    const maleHex = "#2196F3";   // Blu
+    const mixedHex = "#9C27B0";  // Colore misto (per esempio, viola)
+
+    // Conversione da HEX a RGB
+    function hexToRgb(hex) {
+        return [
+            parseInt(hex.slice(1, 3), 16),
+            parseInt(hex.slice(3, 5), 16),
+            parseInt(hex.slice(5, 7), 16),
+        ];
+    }
+
+    const femaleRgb = hexToRgb(femaleHex);
+    const maleRgb = hexToRgb(maleHex);
+    const mixedRgb = hexToRgb(mixedHex);
+
+    // Generare il colore per ogni scholar
+    const colors = scholars.map(scholar => {
+        if (scholar.sesso === "M") {
+            return maleHex;  // Blu per maschi
+        }
+        if (scholar.sesso === "F") {
+            return femaleHex; // Rosa per femmine
+        }
+        return mixedHex;   // Colore misto per gender non specificato
+    });
+
+    console.log("Generated colors:", colors);
+    return colors;
+}
+
+
+
+
   onMount(() => {
-    console.log("Number of classes:", numberOfClasses);
+   console.log("Cart", cart)
+   console.log ("scholars", scholars)
+   
+	
   });
 
-	let shelf = Array.from(Array(parseInt(numberOfClasses)).keys()).map(x => []);
-
-	function randomScholar() {
-		return {
-			sex: Math.random() < 0.5 ? 'm' : 'f',
-			vote: Math.floor(Math.random() * 10) + 1
-		}
-	}
-
-	function randomCluster() {
-		const size = Math.floor(Math.random() * 3) + 1
-		let result = []	
-		for (let i = 0; i < size; i ++) {
-			result.push(randomScholar())
-		}
-		return result;
-	}
-
-	function randomCart(size) {
-		let result = []
-		for (let i = 0; i < size; i ++) {
-			result.push({
-				id: i,
-				scholars: randomCluster()
-			})
-		}
-		return result;
-	}
-
-	let cart = randomCart(100)
-
-	function putInShelf(item, index) {
-		shelf.forEach((itemList, i) => {
-			if (i == index) {
-				if (itemList.indexOf(item) < 0) {
-					itemList.push(item)
-				}
-			}
-			else {
-				let found = itemList.indexOf(item)
-				if (found >= 0) {
-					itemList.splice(found, 1);
-				}
-			}
-		})
-		shelf = shelf
-		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-		cart = cart
-
-		/*
-		const oldItem = shelf[index];
-		const oldShelfIndex = shelf.indexOf(item);
-		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-		if (oldShelfIndex !== -1) shelf[oldShelfIndex] = oldItem;
-		else if (oldItem) cart.push(oldItem);
-		shelf[index] = item;
-		cart = cart;
-		*/
-	}
-
-	function putInCart(item) {
-		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-		cart.push(item);
-		cart = cart;
-		for (let index = 0; index < shelf.length; index ++) {
-			let container = shelf[index]
-			shelf[index] = container.filter(e => {
-				return e.id !== item.id
-			})
-		}
-		shelf = shelf
-	}
-
-	const [send, receive] = crossfade({
-		duration: (d) => 600,
-		easing: elasticOut,
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === "none" ? "" : style.transform;
-
-			return {
-				duration: 600,
-				easing: quintOut,
-				css: (t) => `
-			transform: ${transform} scale(${t});
-			opacity: ${t}
-		  `,
-			};
-		},
-	});
-
-	function arrange() {
-		let index = 0;
-		while (cart.length > 0) {
-			let element = cart.pop();
-			putInShelf(element, index)
-			index = (index + 1) % shelf.length;
-		}
-	}
-
-	function reset() {
-		for (let item of shelf) {
-			for (let scholar of item) {
-				putInCart(scholar)
-			}
-		}
-	}
-
-	function sexColor(scholars) {
-		console.log(scholars)
-		const female = [ parseInt("ff", 16), parseInt("69", 16), parseInt("b4", 16) ]
-		const male = [ parseInt("00", 16), parseInt("00", 16), parseInt("ff", 16) ]
-		const count = scholars.filter(item => item.sex === "m").length;
-		const delta = count / scholars.length;
-		const rgb = [
-			Math.floor((male[0] - female[0]) * delta + female[0]),
-			Math.floor((male[1] - female[1]) * delta + female[1]),
-			Math.floor((male[2] - female[2]) * delta + female[2]),
-		]
-		const result = "#" + rgb[0].toString(16) + rgb[1].toString(16) + rgb[2].toString(16)
-		console.log(result)
-		return result;
-	}
-
+const sectionLetters = generateSections(numberOfClasses);
 </script>
 
 <div class="text-center py-3" >
@@ -149,63 +149,48 @@
 <div class="shelf">
 	<Container>
 		<Row>
-					{#each shelf as items, index}
-		<Col>
-		
-		
-					
-						
-							<div class="slot" on:dropped={(e) => putInShelf(e.detail, index)}>
-								{#each items as item (item.id)}
-									<div
-										class="item"
-										style="font-size: 10px; background-color: {sexColor(item.scholars)};"
-										use:draggable={{
-											data: item,
-											targets: [".cart", ".slot", ".slot .item"],
-										}}
-										in:receive={item.id}
-										out:send={item.id}
-										on:dropped={(e) => putInShelf(e.detail, index)}
-									>
-										<span>{item.scholars.length > 1 ? item.scholars.length : ''}</span>
-									</div>
-								{/each}
-							</div>
-							<Legenda scholars={shelf[index]}></Legenda>
-						
-					
+			{#each shelf as items, index}
+       
+		<Col class="d-flex flex-column align-items-center">
+		<h2>Sezione {sectionLetters[index]}</h2>
+		<div class="slot rounded border border-1"></div>				
+		<Legenda scholars={shelf[index]}></Legenda>								
 				
 		</Col>
-					{/each}
-				
+					
+		 {/each}		
 			
 			
 		</Row>
 	</Container>
-</div>
-			<div xs={3} class="my-2">
-				<div class="cart" on:dropped={(e) => putInCart(e.detail)}>
-					{#each cart as item, index (item.id)}
-						<div
-							class="item"
-							style="font-size: 10px; background-color: {sexColor(item.scholars)};"
-							animate:flip
-							use:draggable={{ data: item, targets: [".slot", ".slot .item"] }}
-							in:receive={item.id}
-							out:send={item.id}
-						>
-							<span>{item.scholars.length > 1 ? item.scholars.length : ''}</span>
-						</div>
-					{/each}
-				</div>
-				<Legenda scholars={cart}></Legenda>
-			</div>
 
+    <div class="slot">
+   {#each cart as item, index (item.id)}
+    <div
+   
+        animate:flip 
+       
+      
+    >
+        {#each sexColor(item.scholars) as color, i}
+            <div class="ball" style="background-color: {color};"   use:draggable={{ data: item, targets: [".slot", ".slot .item"] }}  
+        in:receive={item.id}
+        out:send={item.id}>
+        <span >{item.scholars[i]?.votoUscita}</span>
+            </div>
+        {/each}
+    </div>
+{/each}
+    </div>
+    <Legenda scholars={cart}></Legenda>
+ 
+
+</div>
+		
+				
 <Container>
 	<Row style="padding: 20px; margin: 20px;">
-	<Col>	<button on:click={reset}>Resetta</button></Col>
-	<Col>	 <button  on:click={arrange}>Sistema in automatico</button></Col>
+	
 	<Col>	 <button  >Scarica file</button></Col>
 
 	</Row>
@@ -213,34 +198,14 @@
 
 
 <style>
-	.slot {
-		position: relative;
-		display: inline-block;
-		background: #eee;
-		box-shadow: 5px 5px 10px -10px black inset;
-		width: 300px;
-		height: 300px;
-		margin: 3px;
-		vertical-align: top;
-	}
+
 	.cart {
 		position: relative;
 		background: #eee;
 		box-shadow: 5px 5px 10px -10px black inset;
 		min-height: 300px;
 	}
-	.item {
-		width: 16px;
-        height: 16px;
-        border-radius: 50%;
-		/* background: red;*/
-		position: relative;
-		display: inline-block;
-		margin: 5px;
-		/*
-		box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-		*/
-	}
+	
 	.slot .item {
 		/* position: absolute; */
 	}
