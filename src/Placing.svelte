@@ -127,6 +127,19 @@ function sexColor(scholars) {
     return colors;
 }
 
+// funzione per fare il bordo se ha bisogno di supporto o meno
+function calculateBorder(scholar) {
+    const supportHexColor = "#FF7043"; // Colore per supporto
+    const sameSchoolHexColor = "#FFC107"; // Colore per stessa scuola
+
+    if (scholar.sostegno) {
+      return supportHexColor;
+    } else if (scholar.stessaScuola) {
+      return sameSchoolHexColor;
+    } else {
+      return "transparent"; // Nessun bordo
+    }
+  }
 
 
 
@@ -164,23 +177,25 @@ const sectionLetters = generateSections(numberOfClasses);
 		</Row>
 	</Container>
 
-    <div class="slot">
-   {#each cart as item, index (item.id)}
-    <div
-   
-        animate:flip 
-       
-      
-    >
-        {#each sexColor(item.scholars) as color, i}
-            <div class="ball" style="background-color: {color};"   use:draggable={{ data: item, targets: [".slot", ".slot .item"] }}  
-        in:receive={item.id}
-        out:send={item.id}>
-        <span >{item.scholars[i]?.votoUscita}</span>
-            </div>
-        {/each}
+    <div >
+    {#each cart as item, index (item.id)}
+    <div animate:flip>
+      {#each item.scholars as scholar, i}
+        <div
+          class="ball"
+          style="
+            background-color: {sexColor(item.scholars)[i]};
+            border: 3px solid {calculateBorder(scholar)};
+          "
+          use:draggable={{ data: item, targets: [".slot", ".slot .item"] }}
+          in:receive={item.id}
+          out:send={item.id}
+        >
+          <span>{scholar.votoUscita}</span>
+        </div>
+      {/each}
     </div>
-{/each}
+  {/each}
     </div>
     <Legenda scholars={cart}></Legenda>
  

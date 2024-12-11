@@ -11742,7 +11742,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (154:2) <Col class="d-flex flex-column align-items-center">
+    // (167:2) <Col class="d-flex flex-column align-items-center">
     function create_default_slot_5$1(ctx) {
     	let h2;
     	let t0;
@@ -11772,9 +11772,9 @@ var app = (function () {
     			t3 = space();
     			create_component(legenda.$$.fragment);
     			t4 = space();
-    			add_location(h2, file, 154, 2, 4622);
+    			add_location(h2, file, 167, 2, 5064);
     			attr_dev(div, "class", "slot rounded border border-1");
-    			add_location(div, file, 155, 2, 4666);
+    			add_location(div, file, 168, 2, 5108);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -11811,14 +11811,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5$1.name,
     		type: "slot",
-    		source: "(154:2) <Col class=\\\"d-flex flex-column align-items-center\\\">",
+    		source: "(167:2) <Col class=\\\"d-flex flex-column align-items-center\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (152:3) {#each shelf as items, index}
+    // (165:3) {#each shelf as items, index}
     function create_each_block_2(ctx) {
     	let col;
     	let current;
@@ -11867,14 +11867,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(152:3) {#each shelf as items, index}",
+    		source: "(165:3) {#each shelf as items, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (151:2) <Row>
+    // (164:2) <Row>
     function create_default_slot_4$1(ctx) {
     	let each_1_anchor;
     	let current;
@@ -11965,14 +11965,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4$1.name,
     		type: "slot",
-    		source: "(151:2) <Row>",
+    		source: "(164:2) <Row>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:1) <Container>
+    // (163:1) <Container>
     function create_default_slot_3$1(ctx) {
     	let row;
     	let current;
@@ -12020,18 +12020,18 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$1.name,
     		type: "slot",
-    		source: "(150:1) <Container>",
+    		source: "(163:1) <Container>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (175:8) {#each sexColor(item.scholars) as color, i}
+    // (183:6) {#each item.scholars as scholar, i}
     function create_each_block_1(ctx) {
     	let div;
     	let span;
-    	let t_value = /*item*/ ctx[10].scholars[/*i*/ ctx[15]]?.votoUscita + "";
+    	let t_value = /*scholar*/ ctx[13].votoUscita + "";
     	let t;
     	let div_intro;
     	let div_outro;
@@ -12044,10 +12044,11 @@ var app = (function () {
     			div = element("div");
     			span = element("span");
     			t = text(t_value);
-    			add_location(span, file, 178, 8, 5233);
+    			add_location(span, file, 193, 10, 5763);
     			attr_dev(div, "class", "ball");
-    			set_style(div, "background-color", /*color*/ ctx[13]);
-    			add_location(div, file, 175, 12, 5042);
+    			set_style(div, "background-color", sexColor(/*item*/ ctx[10].scholars)[/*i*/ ctx[15]]);
+    			set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[13]));
+    			add_location(div, file, 183, 8, 5421);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -12096,21 +12097,21 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(175:8) {#each sexColor(item.scholars) as color, i}",
+    		source: "(183:6) {#each item.scholars as scholar, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (168:3) {#each cart as item, index (item.id)}
+    // (181:4) {#each cart as item, index (item.id)}
     function create_each_block(key_1, ctx) {
     	let div;
     	let t;
     	let rect;
     	let stop_animation = noop;
     	let current;
-    	let each_value_1 = sexColor(/*item*/ ctx[10].scholars);
+    	let each_value_1 = /*item*/ ctx[10].scholars;
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -12133,7 +12134,7 @@ var app = (function () {
     			}
 
     			t = space();
-    			add_location(div, file, 168, 4, 4919);
+    			add_location(div, file, 181, 4, 5350);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {
@@ -12151,8 +12152,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*sexColor, cart*/ 2) {
-    				each_value_1 = sexColor(/*item*/ ctx[10].scholars);
+    			if (dirty & /*sexColor, cart, calculateBorder*/ 2) {
+    				each_value_1 = /*item*/ ctx[10].scholars;
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -12218,14 +12219,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(168:3) {#each cart as item, index (item.id)}",
+    		source: "(181:4) {#each cart as item, index (item.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (194:1) <Col>
+    // (209:1) <Col>
     function create_default_slot_2$1(ctx) {
     	let button;
 
@@ -12233,7 +12234,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Scarica file";
-    			add_location(button, file, 193, 8, 5482);
+    			add_location(button, file, 208, 8, 5997);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -12248,14 +12249,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$1.name,
     		type: "slot",
-    		source: "(194:1) <Col>",
+    		source: "(209:1) <Col>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (192:1) <Row style="padding: 20px; margin: 20px;">
+    // (207:1) <Row style="padding: 20px; margin: 20px;">
     function create_default_slot_1$1(ctx) {
     	let col;
     	let current;
@@ -12303,14 +12304,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$1.name,
     		type: "slot",
-    		source: "(192:1) <Row style=\\\"padding: 20px; margin: 20px;\\\">",
+    		source: "(207:1) <Row style=\\\"padding: 20px; margin: 20px;\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (191:0) <Container>
+    // (206:0) <Container>
     function create_default_slot$1(ctx) {
     	let row;
     	let current;
@@ -12359,7 +12360,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(191:0) <Container>",
+    		source: "(206:0) <Container>",
     		ctx
     	});
 
@@ -12439,14 +12440,13 @@ var app = (function () {
     			t6 = space();
     			create_component(container1.$$.fragment);
     			attr_dev(h1, "class", "fw-semibold ");
-    			add_location(h1, file, 143, 2, 4326);
-    			add_location(p, file, 144, 0, 4380);
+    			add_location(h1, file, 156, 2, 4768);
+    			add_location(p, file, 157, 0, 4822);
     			attr_dev(div0, "class", "text-center py-3");
-    			add_location(div0, file, 142, 0, 4291);
-    			attr_dev(div1, "class", "slot");
-    			add_location(div1, file, 166, 4, 4853);
+    			add_location(div0, file, 155, 0, 4733);
+    			add_location(div1, file, 179, 4, 5295);
     			attr_dev(div2, "class", "shelf");
-    			add_location(div2, file, 148, 0, 4478);
+    			add_location(div2, file, 161, 0, 4920);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -12483,7 +12483,7 @@ var app = (function () {
 
     			container0.$set(container0_changes);
 
-    			if (dirty & /*sexColor, cart*/ 2) {
+    			if (dirty & /*cart, sexColor, calculateBorder*/ 2) {
     				each_value = /*cart*/ ctx[1];
     				validate_each_argument(each_value);
     				group_outros();
@@ -12628,6 +12628,20 @@ var app = (function () {
     	return colors;
     }
 
+    // funzione per fare il bordo se ha bisogno di supporto o meno
+    function calculateBorder(scholar) {
+    	const supportHexColor = "#FF7043"; // Colore per supporto
+    	const sameSchoolHexColor = "#FFC107"; // Colore per stessa scuola
+
+    	if (scholar.sostegno) {
+    		return supportHexColor;
+    	} else if (scholar.stessaScuola) {
+    		return sameSchoolHexColor;
+    	} else {
+    		return "transparent"; // Nessun bordo
+    	}
+    }
+
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Placing', slots, []);
@@ -12724,6 +12738,7 @@ var app = (function () {
     		createCartFromStudents,
     		cart,
     		sexColor,
+    		calculateBorder,
     		sectionLetters
     	});
 
