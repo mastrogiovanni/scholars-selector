@@ -15,6 +15,7 @@
 	// array di studenti dal file
 	let students =[];
 	// dichiarazione funzione di conversione di studenti dal file in array
+
   function parseFileContent() {
     if (fileContent !== null) {
         console.log("File content:", fileContent); 
@@ -77,54 +78,30 @@ function generateSections(numberOfSections) {
 // funzioni per la creazione del contenitore degli studenti
 function createCartFromStudents(students) {
   let result = [];
-  for (let i = 0; i < students.length; i += students.length) {
-    const cluster = students.slice(i, i + students.length);
-    result.push({
-      id: students.length,
-      scholars: cluster
-    });
-  }
+  let studentId = 1; // Contatore per l'ID univoco dello studente
+
+  students.forEach(student => {
+    const cluster = {
+      id: result.length + 1, // ID univoco per il gruppo
+      scholars: [{ ...student, id: studentId++ }] // Un solo studente nel gruppo
+    };
+    result.push(cluster);
+  });
+
   return result;
 }
-
 
 let cart = createCartFromStudents(scholars);
 
 // funzione per dividere gli studenti in base al colore
-function sexColor(scholars) {
-    console.log(scholars);
-
-    // Colori HEX per maschi e femmine
-    const femaleHex = "#E91E63"; // Rosa
-    const maleHex = "#2196F3";   // Blu
-    const mixedHex = "#9C27B0";  // Colore misto (per esempio, viola)
-
-    // Conversione da HEX a RGB
-    function hexToRgb(hex) {
-        return [
-            parseInt(hex.slice(1, 3), 16),
-            parseInt(hex.slice(3, 5), 16),
-            parseInt(hex.slice(5, 7), 16),
-        ];
+function sexColor(scholar) {
+    if (scholar.sesso === "M") {
+        return "#2196F3";  // Blu per maschi
     }
-
-    const femaleRgb = hexToRgb(femaleHex);
-    const maleRgb = hexToRgb(maleHex);
-    const mixedRgb = hexToRgb(mixedHex);
-
-    // Generare il colore per ogni scholar
-    const colors = scholars.map(scholar => {
-        if (scholar.sesso === "M") {
-            return maleHex;  // Blu per maschi
-        }
-        if (scholar.sesso === "F") {
-            return femaleHex; // Rosa per femmine
-        }
-        return mixedHex;   // Colore misto per gender non specificato
-    });
-
-    console.log("Generated colors:", colors);
-    return colors;
+    if (scholar.sesso === "F") {
+        return "#E91E63"; // Rosa per femmine
+    }
+    return "#9C27B0";   // Colore misto per gender non specificato
 }
 
 // funzione per fare il bordo se ha bisogno di supporto o meno
@@ -142,41 +119,37 @@ function calculateBorder(scholar) {
   }
 
 
-
+// console.log utili
   onMount(() => {
    console.log("Cart", cart)
    console.log ("scholars", scholars)
+   console.log("shelf", shelf)
    
 	
   });
-  function putInShelf(item, index) {
-		shelf.forEach((itemList, i) => {
-			if (i == index) {
-				if (itemList.indexOf(item) < 0) {
-					itemList.push(item)
-				}
-			}
-			else {
-				let found = itemList.indexOf(item)
-				if (found >= 0) {
-					itemList.splice(found, 1);
-				}
-			}
-		})
-		shelf = shelf
-		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-		cart = cart
 
-		/*
-		const oldItem = shelf[index];
-		const oldShelfIndex = shelf.indexOf(item);
-		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-		if (oldShelfIndex !== -1) shelf[oldShelfIndex] = oldItem;
-		else if (oldItem) cart.push(oldItem);
-		shelf[index] = item;
-		cart = cart;
-		*/
-	}
+
+function putInShelf(item, index) {
+  // Rimuovi l'elemento da tutte le altre liste nello scaffale
+  shelf.forEach((itemList) => {
+    const foundIndex = itemList.indexOf(item);
+    if (foundIndex !== -1) {
+      itemList.splice(foundIndex, 1); // Rimuovi l'elemento se esiste
+    }
+  });
+
+  // Aggiungi l'elemento alla lista corrispondente, se non è già presente
+  if (shelf[index].indexOf(item) === -1) {
+    shelf[index].push(item);
+  }
+
+  // Rimuovi l'elemento dal carrello, se presente
+  const cartIndex = cart.indexOf(item);
+  if (cartIndex !== -1) {
+    cart.splice(cartIndex, 1);
+  }
+}
+
 
 	function putInCart(item) {
 		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
@@ -190,6 +163,34 @@ function calculateBorder(scholar) {
 		}
 		shelf = shelf
 	}
+
+
+
+	function moveItem(item, target, targetIndex) {
+    // Rimuovi l'elemento da tutte le sezioni dello scaffale
+    shelf.forEach(section => {
+        const index = section.indexOf(item);
+        if (index !== -1) {
+            section.splice(index, 1);
+        }
+    });
+
+    // Rimuovi l'elemento dal carrello, se presente
+    const cartIndex = cart.indexOf(item);
+    if (cartIndex !== -1) {
+        cart.splice(cartIndex, 1);
+    }
+
+    // Aggiungi l'elemento al target appropriato
+    if (target === "shelf") {
+        shelf[targetIndex].push(item);
+    } else if (target === "cart") {
+        cart.push(item);
+    }
+	 shelf = [...shelf];
+    cart = [...cart];
+}
+
 
 	const [send, receive] = crossfade({
 		duration: (d) => 600,
@@ -209,23 +210,28 @@ function calculateBorder(scholar) {
 		},
 	});
 
-
 	function arrange() {
-		let index = 0;
-		while (cart.length > 0) {
-			let element = cart.pop();
-			putInShelf(element, index)
-			index = (index + 1) % shelf.length;
-		}
-	}
+    let index = 0;
+    while (cart.length > 0) {
+        const element = cart.pop();
+        shelf[index].push(element);
+        index = (index + 1) % shelf.length;
+    }
+    shelf = [...shelf];
+    cart = [...cart];
+}
 
-	function reset() {
-		for (let item of shelf) {
-			for (let scholar of item) {
-				putInCart(scholar)
-			}
-		}
-	}
+
+function reset() {
+    cart = [];
+    shelf.forEach(section => {
+        cart = cart.concat(section);
+        section.length = 0; // Svuota la sezione
+    });
+    shelf = [...shelf];
+    cart = [...cart];
+}
+
 
 const sectionLetters = generateSections(numberOfClasses);
 </script>
@@ -235,49 +241,64 @@ const sectionLetters = generateSections(numberOfClasses);
 <p >Clicca il bottone del sistema automatico o trascina gli alunni nelle sezioni</p>
 </div>
 
-
-<div class="shelf">
-	<Container>
-		<Row>
-			{#each shelf as items, index}
-       
-		<Col class="d-flex flex-column align-items-center">
-		<h2>Sezione {sectionLetters[index]}</h2>
-		<div class="slot rounded border border-1"></div>				
-		<Legenda scholars={shelf[index]}></Legenda>								
-				
-		</Col>
-					
-		 {/each}		
+<Container>
+	<Row>
+		{#each shelf as items, index}
+			<Col class="d-flex flex-column align-items-center my-2 shelf">
+				<h2>Sezione {sectionLetters[index]}</h2>
 			
-			
-		</Row>
-	</Container>
+				<div class="slot  rounded border border-1" on:dropped={(e) => moveItem(e.detail, "shelf", index)}>
+					 {#each items as item, i}
+					 {#each item.scholars as scholar, i}
 
-    <div >
+       <div
+    class="ball"
+    style="
+        background-color: {sexColor(scholar)};
+        border: 3px solid {calculateBorder(scholar)};
+    "
+    use:draggable={{
+        data: item, 
+        targets: [".slot", ".cart"]
+    }}
+   
+>
+    <span>{scholar.votoUscita}</span>
+</div>
+      {/each}
+      {/each}
+				</div>
+				<Legenda scholars={items} />
+			</Col>
+		{/each}
+	</Row>
+</Container>
+
+    <div class="cart rounded border border-1 container"  on:dropped={(e) => moveItem(e.detail, "cart")} >
     {#each cart as item, index (item.id)}
     <div animate:flip>
       {#each item.scholars as scholar, i}
-        <div
-          class="ball"
-          style="
-            background-color: {sexColor(item.scholars)[i]};
-            border: 3px solid {calculateBorder(scholar)};
-          "
-          use:draggable={{ data: item, targets: [".slot", ".slot .item"] }}
-          in:receive={item.id}
-          out:send={item.id}
-        >
-          <span>{scholar.votoUscita}</span>
-        </div>
+       <div
+    class="ball"
+    style="
+        background-color: {sexColor(scholar)};
+        border: 3px solid {calculateBorder(scholar)};
+    "
+    use:draggable={{
+        data: item, 
+        targets: [".slot", ".cart"]
+    }}
+   
+>
+    <span>{scholar.votoUscita}</span>
+</div>
       {/each}
     </div>
   {/each}
-    </div>
     <Legenda scholars={cart}></Legenda>
+    </div>
  
 
-</div>
 		
 				
 <Container>

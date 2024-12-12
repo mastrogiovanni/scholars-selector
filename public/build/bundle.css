@@ -72,4 +72,4 @@ form {
 
   margin: 5px;
 }
-.dragged{pointer-events:none;z-index:100}.slot.droptarget, .cart.droptarget{background:#ddd}.modal-open{overflow:hidden;padding-right:0}.overflow-noscroll{overflow:hidden;padding-right:0px}.item.svelte-udes0p{width:16px;height:16px;border:50%;background:red;position:relative;display:inline-block;margin:4px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2)}
+.cart.svelte-73a9fq{position:relative;background:#eee;box-shadow:5px 5px 10px -10px black inset;min-height:300px}.dragged{pointer-events:none;z-index:100}.slot.droptarget, .cart.droptarget{background:#ddd}.modal-open{overflow:hidden;padding-right:0}.overflow-noscroll{overflow:hidden;padding-right:0px}.item.svelte-udes0p{width:16px;height:16px;border:50%;background:red;position:relative;display:inline-block;margin:4px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2)}

@@ -780,14 +780,14 @@ var app = (function () {
             }
         };
     }
-    function outro_and_destroy_block(block, lookup) {
-        transition_out(block, 1, 1, () => {
-            lookup.delete(block.key);
-        });
+
+    function destroy_block(block, lookup) {
+        block.d(1);
+        lookup.delete(block.key);
     }
-    function fix_and_outro_and_destroy_block(block, lookup) {
+    function fix_and_destroy_block(block, lookup) {
         block.f();
-        outro_and_destroy_block(block, lookup);
+        destroy_block(block, lookup);
     }
     function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
         let o = old_blocks.length;
@@ -11851,30 +11851,187 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
-    	child_ctx[18] = i;
-    	return child_ctx;
-    }
-
-    function get_each_context_1(ctx, list, i) {
-    	const child_ctx = ctx.slice();
     	child_ctx[19] = list[i];
     	child_ctx[21] = i;
     	return child_ctx;
     }
 
-    function get_each_context_2(ctx, list, i) {
+    function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[22] = list[i];
-    	child_ctx[18] = i;
+    	child_ctx[24] = i;
     	return child_ctx;
     }
 
-    // (244:2) <Col class="d-flex flex-column align-items-center">
+    function get_each_context_2(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[25] = list[i];
+    	child_ctx[21] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_3(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[19] = list[i];
+    	child_ctx[24] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_4(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[22] = list[i];
+    	child_ctx[24] = i;
+    	return child_ctx;
+    }
+
+    // (252:6) {#each item.scholars as scholar, i}
+    function create_each_block_4(ctx) {
+    	let div;
+    	let span;
+    	let t0_value = /*scholar*/ ctx[22].votoUscita + "";
+    	let t0;
+    	let t1;
+    	let draggable_action;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			span = element("span");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			add_location(span, file, 265, 4, 7411);
+    			attr_dev(div, "class", "ball");
+    			set_style(div, "background-color", sexColor(/*scholar*/ ctx[22]));
+    			set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[22]));
+    			add_location(div, file, 253, 7, 7163);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, span);
+    			append_dev(span, t0);
+    			append_dev(div, t1);
+
+    			if (!mounted) {
+    				dispose = action_destroyer(draggable_action = draggable.call(null, div, {
+    					data: /*item*/ ctx[19],
+    					targets: [".slot", ".cart"]
+    				}));
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if (dirty & /*shelf*/ 1 && t0_value !== (t0_value = /*scholar*/ ctx[22].votoUscita + "")) set_data_dev(t0, t0_value);
+
+    			if (dirty & /*shelf*/ 1) {
+    				set_style(div, "background-color", sexColor(/*scholar*/ ctx[22]));
+    			}
+
+    			if (dirty & /*shelf*/ 1) {
+    				set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[22]));
+    			}
+
+    			if (draggable_action && is_function(draggable_action.update) && dirty & /*shelf*/ 1) draggable_action.update.call(null, {
+    				data: /*item*/ ctx[19],
+    				targets: [".slot", ".cart"]
+    			});
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_4.name,
+    		type: "each",
+    		source: "(252:6) {#each item.scholars as scholar, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (251:6) {#each items as item, i}
+    function create_each_block_3(ctx) {
+    	let each_1_anchor;
+    	let each_value_4 = /*item*/ ctx[19].scholars;
+    	validate_each_argument(each_value_4);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_4.length; i += 1) {
+    		each_blocks[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(target, anchor);
+    				}
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*sexColor, shelf, calculateBorder*/ 1) {
+    				each_value_4 = /*item*/ ctx[19].scholars;
+    				validate_each_argument(each_value_4);
+    				let i;
+
+    				for (i = 0; i < each_value_4.length; i += 1) {
+    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_4(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_4.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_3.name,
+    		type: "each",
+    		source: "(251:6) {#each items as item, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (247:3) <Col class="d-flex flex-column align-items-center my-2 shelf">
     function create_default_slot_7$1(ctx) {
     	let h2;
     	let t0;
-    	let t1_value = /*sectionLetters*/ ctx[6][/*index*/ ctx[18]] + "";
+    	let t1_value = /*sectionLetters*/ ctx[5][/*index*/ ctx[21]] + "";
     	let t1;
     	let t2;
     	let div;
@@ -11882,11 +12039,22 @@ var app = (function () {
     	let legenda;
     	let t4;
     	let current;
+    	let mounted;
+    	let dispose;
+    	let each_value_3 = /*items*/ ctx[25];
+    	validate_each_argument(each_value_3);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_3.length; i += 1) {
+    		each_blocks[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
+    	}
+
+    	function dropped_handler(...args) {
+    		return /*dropped_handler*/ ctx[6](/*index*/ ctx[21], ...args);
+    	}
 
     	legenda = new Legenda({
-    			props: {
-    				scholars: /*shelf*/ ctx[0][/*index*/ ctx[18]]
-    			},
+    			props: { scholars: /*items*/ ctx[25] },
     			$$inline: true
     		});
 
@@ -11897,12 +12065,17 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
     			t3 = space();
     			create_component(legenda.$$.fragment);
     			t4 = space();
-    			add_location(h2, file, 244, 2, 6808);
+    			add_location(h2, file, 247, 4, 6928);
     			attr_dev(div, "class", "slot rounded border border-1");
-    			add_location(div, file, 245, 2, 6852);
+    			add_location(div, file, 249, 4, 6979);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -11910,14 +12083,52 @@ var app = (function () {
     			append_dev(h2, t1);
     			insert_dev(target, t2, anchor);
     			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div, null);
+    				}
+    			}
+
     			insert_dev(target, t3, anchor);
     			mount_component(legenda, target, anchor);
     			insert_dev(target, t4, anchor);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div, "dropped", dropped_handler, false, false, false, false);
+    				mounted = true;
+    			}
     		},
-    		p: function update(ctx, dirty) {
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*shelf, sexColor, calculateBorder*/ 1) {
+    				each_value_3 = /*items*/ ctx[25];
+    				validate_each_argument(each_value_3);
+    				let i;
+
+    				for (i = 0; i < each_value_3.length; i += 1) {
+    					const child_ctx = get_each_context_3(ctx, each_value_3, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_3(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_3.length;
+    			}
+
     			const legenda_changes = {};
-    			if (dirty & /*shelf*/ 1) legenda_changes.scholars = /*shelf*/ ctx[0][/*index*/ ctx[18]];
+    			if (dirty & /*shelf*/ 1) legenda_changes.scholars = /*items*/ ctx[25];
     			legenda.$set(legenda_changes);
     		},
     		i: function intro(local) {
@@ -11933,9 +12144,12 @@ var app = (function () {
     			if (detaching) detach_dev(h2);
     			if (detaching) detach_dev(t2);
     			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
     			if (detaching) detach_dev(t3);
     			destroy_component(legenda, detaching);
     			if (detaching) detach_dev(t4);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -11943,21 +12157,21 @@ var app = (function () {
     		block,
     		id: create_default_slot_7$1.name,
     		type: "slot",
-    		source: "(244:2) <Col class=\\\"d-flex flex-column align-items-center\\\">",
+    		source: "(247:3) <Col class=\\\"d-flex flex-column align-items-center my-2 shelf\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (242:3) {#each shelf as items, index}
+    // (246:2) {#each shelf as items, index}
     function create_each_block_2(ctx) {
     	let col;
     	let current;
 
     	col = new Col({
     			props: {
-    				class: "d-flex flex-column align-items-center",
+    				class: "d-flex flex-column align-items-center my-2 shelf",
     				$$slots: { default: [create_default_slot_7$1] },
     				$$scope: { ctx }
     			},
@@ -11975,7 +12189,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const col_changes = {};
 
-    			if (dirty & /*$$scope, shelf*/ 16777217) {
+    			if (dirty & /*$$scope, shelf*/ 536870913) {
     				col_changes.$$scope = { dirty, ctx };
     			}
 
@@ -11999,14 +12213,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(242:3) {#each shelf as items, index}",
+    		source: "(246:2) {#each shelf as items, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (241:2) <Row>
+    // (245:1) <Row>
     function create_default_slot_6$1(ctx) {
     	let each_1_anchor;
     	let current;
@@ -12041,7 +12255,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*shelf, sectionLetters*/ 65) {
+    			if (dirty & /*shelf, moveItem, sexColor, calculateBorder, sectionLetters*/ 37) {
     				each_value_2 = /*shelf*/ ctx[0];
     				validate_each_argument(each_value_2);
     				let i;
@@ -12097,14 +12311,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_6$1.name,
     		type: "slot",
-    		source: "(241:2) <Row>",
+    		source: "(245:1) <Row>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (240:1) <Container>
+    // (244:0) <Container>
     function create_default_slot_5$1(ctx) {
     	let row;
     	let current;
@@ -12128,7 +12342,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const row_changes = {};
 
-    			if (dirty & /*$$scope, shelf*/ 16777217) {
+    			if (dirty & /*$$scope, shelf*/ 536870913) {
     				row_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12152,23 +12366,20 @@ var app = (function () {
     		block,
     		id: create_default_slot_5$1.name,
     		type: "slot",
-    		source: "(240:1) <Container>",
+    		source: "(244:0) <Container>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (260:6) {#each item.scholars as scholar, i}
+    // (280:6) {#each item.scholars as scholar, i}
     function create_each_block_1(ctx) {
     	let div;
     	let span;
-    	let t_value = /*scholar*/ ctx[19].votoUscita + "";
+    	let t_value = /*scholar*/ ctx[22].votoUscita + "";
     	let t;
     	let draggable_action;
-    	let div_intro;
-    	let div_outro;
-    	let current;
     	let mounted;
     	let dispose;
 
@@ -12177,22 +12388,21 @@ var app = (function () {
     			div = element("div");
     			span = element("span");
     			t = text(t_value);
-    			add_location(span, file, 270, 10, 7507);
+    			add_location(span, file, 292, 4, 8049);
     			attr_dev(div, "class", "ball");
-    			set_style(div, "background-color", sexColor(/*item*/ ctx[16].scholars)[/*i*/ ctx[21]]);
-    			set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[19]));
-    			add_location(div, file, 260, 8, 7165);
+    			set_style(div, "background-color", sexColor(/*scholar*/ ctx[22]));
+    			set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[22]));
+    			add_location(div, file, 280, 7, 7801);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, span);
     			append_dev(span, t);
-    			current = true;
 
     			if (!mounted) {
     				dispose = action_destroyer(draggable_action = draggable.call(null, div, {
-    					data: /*item*/ ctx[16],
-    					targets: [".slot", ".slot .item"]
+    					data: /*item*/ ctx[19],
+    					targets: [".slot", ".cart"]
     				}));
 
     				mounted = true;
@@ -12200,41 +12410,23 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if ((!current || dirty & /*cart*/ 2) && t_value !== (t_value = /*scholar*/ ctx[19].votoUscita + "")) set_data_dev(t, t_value);
+    			if (dirty & /*cart*/ 2 && t_value !== (t_value = /*scholar*/ ctx[22].votoUscita + "")) set_data_dev(t, t_value);
 
-    			if (!current || dirty & /*cart*/ 2) {
-    				set_style(div, "background-color", sexColor(/*item*/ ctx[16].scholars)[/*i*/ ctx[21]]);
+    			if (dirty & /*cart*/ 2) {
+    				set_style(div, "background-color", sexColor(/*scholar*/ ctx[22]));
     			}
 
-    			if (!current || dirty & /*cart*/ 2) {
-    				set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[19]));
+    			if (dirty & /*cart*/ 2) {
+    				set_style(div, "border", "3px solid " + calculateBorder(/*scholar*/ ctx[22]));
     			}
 
     			if (draggable_action && is_function(draggable_action.update) && dirty & /*cart*/ 2) draggable_action.update.call(null, {
-    				data: /*item*/ ctx[16],
-    				targets: [".slot", ".slot .item"]
+    				data: /*item*/ ctx[19],
+    				targets: [".slot", ".cart"]
     			});
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-
-    			add_render_callback(() => {
-    				if (!current) return;
-    				if (div_outro) div_outro.end(1);
-    				div_intro = create_in_transition(div, /*receive*/ ctx[3], /*item*/ ctx[16].id);
-    				div_intro.start();
-    			});
-
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			if (div_intro) div_intro.invalidate();
-    			div_outro = create_out_transition(div, /*send*/ ctx[2], /*item*/ ctx[16].id);
-    			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
-    			if (detaching && div_outro) div_outro.end();
     			mounted = false;
     			dispose();
     		}
@@ -12244,31 +12436,25 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(260:6) {#each item.scholars as scholar, i}",
+    		source: "(280:6) {#each item.scholars as scholar, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (258:4) {#each cart as item, index (item.id)}
+    // (278:4) {#each cart as item, index (item.id)}
     function create_each_block(key_1, ctx) {
     	let div;
-    	let t;
     	let rect;
     	let stop_animation = noop;
-    	let current;
-    	let each_value_1 = /*item*/ ctx[16].scholars;
+    	let each_value_1 = /*item*/ ctx[19].scholars;
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
     		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
-
-    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
-    		each_blocks[i] = null;
-    	});
 
     	const block = {
     		key: key_1,
@@ -12280,8 +12466,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			t = space();
-    			add_location(div, file, 258, 4, 7094);
+    			add_location(div, file, 278, 4, 7731);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {
@@ -12292,15 +12477,12 @@ var app = (function () {
     					each_blocks[i].m(div, null);
     				}
     			}
-
-    			append_dev(div, t);
-    			current = true;
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
     			if (dirty & /*sexColor, cart, calculateBorder*/ 2) {
-    				each_value_1 = /*item*/ ctx[16].scholars;
+    				each_value_1 = /*item*/ ctx[19].scholars;
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -12309,22 +12491,18 @@ var app = (function () {
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
-    						transition_in(each_blocks[i], 1);
     					} else {
     						each_blocks[i] = create_each_block_1(child_ctx);
     						each_blocks[i].c();
-    						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(div, t);
+    						each_blocks[i].m(div, null);
     					}
     				}
 
-    				group_outros();
-
-    				for (i = each_value_1.length; i < each_blocks.length; i += 1) {
-    					out(i);
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
     				}
 
-    				check_outros();
+    				each_blocks.length = each_value_1.length;
     			}
     		},
     		r: function measure() {
@@ -12338,24 +12516,6 @@ var app = (function () {
     			stop_animation();
     			stop_animation = create_animation(div, rect, flip, {});
     		},
-    		i: function intro(local) {
-    			if (current) return;
-
-    			for (let i = 0; i < each_value_1.length; i += 1) {
-    				transition_in(each_blocks[i]);
-    			}
-
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			each_blocks = each_blocks.filter(Boolean_1);
-
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				transition_out(each_blocks[i]);
-    			}
-
-    			current = false;
-    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			destroy_each(each_blocks, detaching);
@@ -12366,14 +12526,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(258:4) {#each cart as item, index (item.id)}",
+    		source: "(278:4) {#each cart as item, index (item.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (286:1) <Col>
+    // (307:1) <Col>
     function create_default_slot_4$1(ctx) {
     	let button;
 
@@ -12381,7 +12541,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Scarica file";
-    			add_location(button, file, 285, 8, 7741);
+    			add_location(button, file, 306, 8, 8267);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -12396,14 +12556,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4$1.name,
     		type: "slot",
-    		source: "(286:1) <Col>",
+    		source: "(307:1) <Col>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (287:12) <Col>
+    // (308:12) <Col>
     function create_default_slot_3$1(ctx) {
     	let button;
     	let mounted;
@@ -12413,13 +12573,13 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Resetta";
-    			add_location(button, file, 286, 18, 7798);
+    			add_location(button, file, 307, 18, 8324);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*reset*/ ctx[5], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*reset*/ ctx[4], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -12435,14 +12595,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3$1.name,
     		type: "slot",
-    		source: "(287:12) <Col>",
+    		source: "(308:12) <Col>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (288:1) <Col>
+    // (309:1) <Col>
     function create_default_slot_2$1(ctx) {
     	let button;
     	let mounted;
@@ -12452,13 +12612,13 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Sistema in automatico";
-    			add_location(button, file, 287, 8, 7855);
+    			add_location(button, file, 308, 8, 8381);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*arrange*/ ctx[4], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*arrange*/ ctx[3], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -12474,14 +12634,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$1.name,
     		type: "slot",
-    		source: "(288:1) <Col>",
+    		source: "(309:1) <Col>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (284:1) <Row style="padding: 20px; margin: 20px;">
+    // (305:1) <Row style="padding: 20px; margin: 20px;">
     function create_default_slot_1$1(ctx) {
     	let col0;
     	let t0;
@@ -12533,21 +12693,21 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const col0_changes = {};
 
-    			if (dirty & /*$$scope*/ 16777216) {
+    			if (dirty & /*$$scope*/ 536870912) {
     				col0_changes.$$scope = { dirty, ctx };
     			}
 
     			col0.$set(col0_changes);
     			const col1_changes = {};
 
-    			if (dirty & /*$$scope*/ 16777216) {
+    			if (dirty & /*$$scope*/ 536870912) {
     				col1_changes.$$scope = { dirty, ctx };
     			}
 
     			col1.$set(col1_changes);
     			const col2_changes = {};
 
-    			if (dirty & /*$$scope*/ 16777216) {
+    			if (dirty & /*$$scope*/ 536870912) {
     				col2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12579,14 +12739,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$1.name,
     		type: "slot",
-    		source: "(284:1) <Row style=\\\"padding: 20px; margin: 20px;\\\">",
+    		source: "(305:1) <Row style=\\\"padding: 20px; margin: 20px;\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (283:0) <Container>
+    // (304:0) <Container>
     function create_default_slot$1(ctx) {
     	let row;
     	let current;
@@ -12611,7 +12771,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const row_changes = {};
 
-    			if (dirty & /*$$scope*/ 16777216) {
+    			if (dirty & /*$$scope*/ 536870912) {
     				row_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12635,7 +12795,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(283:0) <Container>",
+    		source: "(304:0) <Container>",
     		ctx
     	});
 
@@ -12648,7 +12808,6 @@ var app = (function () {
     	let t1;
     	let p;
     	let t3;
-    	let div2;
     	let container0;
     	let t4;
     	let div1;
@@ -12659,6 +12818,8 @@ var app = (function () {
     	let t6;
     	let container1;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	container0 = new Container({
     			props: {
@@ -12670,7 +12831,7 @@ var app = (function () {
 
     	let each_value = /*cart*/ ctx[1];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*item*/ ctx[16].id;
+    	const get_key = ctx => /*item*/ ctx[19].id;
     	validate_each_keys(ctx, each_value, get_each_context, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -12701,7 +12862,6 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "Clicca il bottone del sistema automatico o trascina gli alunni nelle sezioni";
     			t3 = space();
-    			div2 = element("div");
     			create_component(container0.$$.fragment);
     			t4 = space();
     			div1 = element("div");
@@ -12715,13 +12875,12 @@ var app = (function () {
     			t6 = space();
     			create_component(container1.$$.fragment);
     			attr_dev(h1, "class", "fw-semibold ");
-    			add_location(h1, file, 233, 2, 6512);
-    			add_location(p, file, 234, 0, 6566);
+    			add_location(h1, file, 239, 2, 6653);
+    			add_location(p, file, 240, 0, 6707);
     			attr_dev(div0, "class", "text-center py-3");
-    			add_location(div0, file, 232, 0, 6477);
-    			add_location(div1, file, 256, 4, 7039);
-    			attr_dev(div2, "class", "shelf");
-    			add_location(div2, file, 238, 0, 6664);
+    			add_location(div0, file, 238, 0, 6618);
+    			attr_dev(div1, "class", "cart rounded border border-1 container svelte-73a9fq");
+    			add_location(div1, file, 276, 4, 7581);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -12732,10 +12891,9 @@ var app = (function () {
     			append_dev(div0, t1);
     			append_dev(div0, p);
     			insert_dev(target, t3, anchor);
-    			insert_dev(target, div2, anchor);
-    			mount_component(container0, div2, null);
-    			append_dev(div2, t4);
-    			append_dev(div2, div1);
+    			mount_component(container0, target, anchor);
+    			insert_dev(target, t4, anchor);
+    			insert_dev(target, div1, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -12743,16 +12901,21 @@ var app = (function () {
     				}
     			}
 
-    			append_dev(div2, t5);
-    			mount_component(legenda, div2, null);
+    			append_dev(div1, t5);
+    			mount_component(legenda, div1, null);
     			insert_dev(target, t6, anchor);
     			mount_component(container1, target, anchor);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div1, "dropped", /*dropped_handler_1*/ ctx[7], false, false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
     			const container0_changes = {};
 
-    			if (dirty & /*$$scope, shelf*/ 16777217) {
+    			if (dirty & /*$$scope, shelf*/ 536870913) {
     				container0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12761,12 +12924,10 @@ var app = (function () {
     			if (dirty & /*cart, sexColor, calculateBorder*/ 2) {
     				each_value = /*cart*/ ctx[1];
     				validate_each_argument(each_value);
-    				group_outros();
     				for (let i = 0; i < each_blocks.length; i += 1) each_blocks[i].r();
     				validate_each_keys(ctx, each_value, get_each_context, get_key);
-    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div1, fix_and_outro_and_destroy_block, create_each_block, null, get_each_context);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div1, fix_and_destroy_block, create_each_block, t5, get_each_context);
     				for (let i = 0; i < each_blocks.length; i += 1) each_blocks[i].a();
-    				check_outros();
     			}
 
     			const legenda_changes = {};
@@ -12774,7 +12935,7 @@ var app = (function () {
     			legenda.$set(legenda_changes);
     			const container1_changes = {};
 
-    			if (dirty & /*$$scope*/ 16777216) {
+    			if (dirty & /*$$scope*/ 536870912) {
     				container1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12783,22 +12944,12 @@ var app = (function () {
     		i: function intro(local) {
     			if (current) return;
     			transition_in(container0.$$.fragment, local);
-
-    			for (let i = 0; i < each_value.length; i += 1) {
-    				transition_in(each_blocks[i]);
-    			}
-
     			transition_in(legenda.$$.fragment, local);
     			transition_in(container1.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(container0.$$.fragment, local);
-
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				transition_out(each_blocks[i]);
-    			}
-
     			transition_out(legenda.$$.fragment, local);
     			transition_out(container1.$$.fragment, local);
     			current = false;
@@ -12806,8 +12957,9 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div0);
     			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(div2);
-    			destroy_component(container0);
+    			destroy_component(container0, detaching);
+    			if (detaching) detach_dev(t4);
+    			if (detaching) detach_dev(div1);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].d();
@@ -12816,6 +12968,8 @@ var app = (function () {
     			destroy_component(legenda);
     			if (detaching) detach_dev(t6);
     			destroy_component(container1, detaching);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -12857,53 +13011,32 @@ var app = (function () {
     // funzioni per la creazione del contenitore degli studenti
     function createCartFromStudents(students) {
     	let result = [];
+    	let studentId = 1; // Contatore per l'ID univoco dello studente
 
-    	for (let i = 0; i < students.length; i += students.length) {
-    		const cluster = students.slice(i, i + students.length);
-    		result.push({ id: students.length, scholars: cluster });
-    	}
+    	students.forEach(student => {
+    		const cluster = {
+    			id: result.length + 1, // ID univoco per il gruppo
+    			scholars: [{ ...student, id: studentId++ }], // Un solo studente nel gruppo
+    			
+    		};
+
+    		result.push(cluster);
+    	});
 
     	return result;
     }
 
     // funzione per dividere gli studenti in base al colore
-    function sexColor(scholars) {
-    	console.log(scholars);
-
-    	// Colori HEX per maschi e femmine
-    	const femaleHex = "#E91E63"; // Rosa
-
-    	const maleHex = "#2196F3"; // Blu
-    	const mixedHex = "#9C27B0"; // Colore misto (per esempio, viola)
-
-    	// Conversione da HEX a RGB
-    	function hexToRgb(hex) {
-    		return [
-    			parseInt(hex.slice(1, 3), 16),
-    			parseInt(hex.slice(3, 5), 16),
-    			parseInt(hex.slice(5, 7), 16)
-    		];
+    function sexColor(scholar) {
+    	if (scholar.sesso === "M") {
+    		return "#2196F3"; // Blu per maschi
     	}
 
-    	hexToRgb(femaleHex);
-    	hexToRgb(maleHex);
-    	hexToRgb(mixedHex);
+    	if (scholar.sesso === "F") {
+    		return "#E91E63"; // Rosa per femmine
+    	}
 
-    	// Generare il colore per ogni scholar
-    	const colors = scholars.map(scholar => {
-    		if (scholar.sesso === "M") {
-    			return maleHex; // Blu per maschi
-    		}
-
-    		if (scholar.sesso === "F") {
-    			return femaleHex; // Rosa per femmine
-    		}
-
-    		return mixedHex; // Colore misto per gender non specificato
-    	});
-
-    	console.log("Generated colors:", colors);
-    	return colors;
+    	return "#9C27B0"; // Colore misto per gender non specificato
     }
 
     // funzione per fare il bordo se ha bisogno di supporto o meno
@@ -12978,38 +13111,35 @@ var app = (function () {
 
     	let cart = createCartFromStudents(scholars);
 
+    	// console.log utili
     	onMount(() => {
     		console.log("Cart", cart);
     		console.log("scholars", scholars);
+    		console.log("shelf", shelf);
     	});
 
     	function putInShelf(item, index) {
-    		shelf.forEach((itemList, i) => {
-    			if (i == index) {
-    				if (itemList.indexOf(item) < 0) {
-    					itemList.push(item);
-    				}
-    			} else {
-    				let found = itemList.indexOf(item);
+    		// Rimuovi l'elemento da tutte le altre liste nello scaffale
+    		shelf.forEach(itemList => {
+    			const foundIndex = itemList.indexOf(item);
 
-    				if (found >= 0) {
-    					itemList.splice(found, 1);
-    				}
+    			if (foundIndex !== -1) {
+    				itemList.splice(foundIndex, 1); // Rimuovi l'elemento se esiste
     			}
     		});
 
-    		$$invalidate(0, shelf);
-    		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-    		$$invalidate(1, cart);
-    	} /*
-    const oldItem = shelf[index];
-    const oldShelfIndex = shelf.indexOf(item);
-    if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
-    if (oldShelfIndex !== -1) shelf[oldShelfIndex] = oldItem;
-    else if (oldItem) cart.push(oldItem);
-    shelf[index] = item;
-    cart = cart;
-    */
+    		// Aggiungi l'elemento alla lista corrispondente, se non è già presente
+    		if (shelf[index].indexOf(item) === -1) {
+    			shelf[index].push(item);
+    		}
+
+    		// Rimuovi l'elemento dal carrello, se presente
+    		const cartIndex = cart.indexOf(item);
+
+    		if (cartIndex !== -1) {
+    			cart.splice(cartIndex, 1);
+    		}
+    	}
 
     	function putInCart(item) {
     		if (cart.indexOf(item) !== -1) cart.splice(cart.indexOf(item), 1);
@@ -13029,6 +13159,34 @@ var app = (function () {
     		}
 
     		$$invalidate(0, shelf);
+    	}
+
+    	function moveItem(item, target, targetIndex) {
+    		// Rimuovi l'elemento da tutte le sezioni dello scaffale
+    		shelf.forEach(section => {
+    			const index = section.indexOf(item);
+
+    			if (index !== -1) {
+    				section.splice(index, 1);
+    			}
+    		});
+
+    		// Rimuovi l'elemento dal carrello, se presente
+    		const cartIndex = cart.indexOf(item);
+
+    		if (cartIndex !== -1) {
+    			cart.splice(cartIndex, 1);
+    		}
+
+    		// Aggiungi l'elemento al target appropriato
+    		if (target === "shelf") {
+    			shelf[targetIndex].push(item);
+    		} else if (target === "cart") {
+    			cart.push(item);
+    		}
+
+    		$$invalidate(0, shelf = [...shelf]);
+    		$$invalidate(1, cart = [...cart]);
     	}
 
     	const [send, receive] = crossfade({
@@ -13053,18 +13211,25 @@ var app = (function () {
     		let index = 0;
 
     		while (cart.length > 0) {
-    			let element = cart.pop();
-    			putInShelf(element, index);
+    			const element = cart.pop();
+    			shelf[index].push(element);
     			index = (index + 1) % shelf.length;
     		}
+
+    		$$invalidate(0, shelf = [...shelf]);
+    		$$invalidate(1, cart = [...cart]);
     	}
 
     	function reset() {
-    		for (let item of shelf) {
-    			for (let scholar of item) {
-    				putInCart(scholar);
-    			}
-    		}
+    		$$invalidate(1, cart = []);
+
+    		shelf.forEach(section => {
+    			$$invalidate(1, cart = cart.concat(section));
+    			section.length = 0; // Svuota la sezione
+    		});
+
+    		$$invalidate(0, shelf = [...shelf]);
+    		$$invalidate(1, cart = [...cart]);
     	}
 
     	const sectionLetters = generateSections(numberOfClasses);
@@ -13073,6 +13238,9 @@ var app = (function () {
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<Placing> was created with unknown prop '${key}'`);
     	});
+
+    	const dropped_handler = (index, e) => moveItem(e.detail, "shelf", index);
+    	const dropped_handler_1 = e => moveItem(e.detail, "cart");
 
     	$$self.$capture_state = () => ({
     		Legenda,
@@ -13103,6 +13271,7 @@ var app = (function () {
     		calculateBorder,
     		putInShelf,
     		putInCart,
+    		moveItem,
     		send,
     		receive,
     		arrange,
@@ -13123,7 +13292,16 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [shelf, cart, send, receive, arrange, reset, sectionLetters];
+    	return [
+    		shelf,
+    		cart,
+    		moveItem,
+    		arrange,
+    		reset,
+    		sectionLetters,
+    		dropped_handler,
+    		dropped_handler_1
+    	];
     }
 
     class Placing extends SvelteComponentDev {
