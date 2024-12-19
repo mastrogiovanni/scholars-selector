@@ -44,7 +44,7 @@ import Placing from './Placing.svelte';
 
 </script>
 
-<StepWizard initialStep={2} >
+<StepWizard initialStep={1} >
     <StepWizard.Step num={1} let:nextStep >
     <Header/>
 
